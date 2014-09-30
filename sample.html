@@ -12,9 +12,12 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNBip8unTQpk2BazqCI-G770zRyEb6v3U">
     </script>
+    <script type="text/javascript"
+            src="/map.js">
+    </script>
     <script type="text/javascript">
       
-      google.maps.event.addDomListener(window, 'load', initialize);
+      google.maps.event.addDomListener(window, 'load', function(){initialize(document.getElementById('map-canvas'))});
     </script>
 </head>
 <body>
