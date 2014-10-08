@@ -6,6 +6,7 @@ var Locality = function(mapEle, mapOptions){
         var _selectedMarker;
         var _map;
         var _directionSvc = new google.maps.DirectionsService();
+        var _directionDisp = new google.maps.DirectionsRenderer();
         
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
@@ -20,7 +21,7 @@ var Locality = function(mapEle, mapOptions){
         
         self.initialize = function(){
                  _map = new google.maps.Map(_mapEle, _options);
-                
+                _directionDisp.setMap(_map);
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
@@ -83,7 +84,7 @@ var Locality = function(mapEle, mapOptions){
                 };
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-                        //directionsDisplay.setDirections(response);
+                        _directionDisp.setDirections(response);
                         var route = response.routes[0];
                 }
                 });
