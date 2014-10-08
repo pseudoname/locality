@@ -18,10 +18,7 @@
 <body>
     <div id="map_canvas"></div>
     <script type="text/javascript">
-      var locality = new Locality(document.getElementById('map_canvas'),{
-                        center: { lat: -34.397, lng: 150.644},
-                        zoom: 5
-                });
+      var locality = new Locality(document.getElementById('map_canvas'));
       //google.maps.event.addDomListener(window, 'load', locality.initialize);
       locality.initialize();
     </script>
