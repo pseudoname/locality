@@ -40,10 +40,10 @@ var Locality = function(mapEle, mapOptions){
                 });
                 _markers.push(marker);
                 _selectedMarker = marker;
-                addMarkerEvent(marker, 'click', function(){
+                self.addMarkerEvent(marker, 'click', function(){
                         _selectedMarker = this;
                 });
-                addMarkerEvent(marker, 'rightclick', function(event){
+                self.addMarkerEvent(marker, 'rightclick', function(event){
                         _selectedMarker = this;
                         self.removeSelectedPathMarker();
                 });
