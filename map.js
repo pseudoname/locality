@@ -71,13 +71,14 @@ var Locality = function(mapEle, mapOptions){
                         return;
                 }
                 var wayPoints = [];
-                var wayPtMarkers = _markers.splice(1,_markers.length-2);
+                var tempMarkers = _markers.slice();
+                var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-2);
                 for(var i=0; i< wayPtMarkers.length;i++){
                         wayPoints.push({location:wayPtMarkers[i].getPosition()});
                 }
                 var request = {
                         origin: _markers[0].getPosition(),
-                        destination: _markers[_markers.length-1].getPosition(),
+                        destination: (_markers.length == 2)?_markers[_markers.length-1].getPosition():_markers[0].getPosition(),
                         waypoints: wayPoints,
                         optimizeWaypoints: true,
                         travelMode: google.maps.TravelMode.DRIVING
@@ -85,6 +86,7 @@ var Locality = function(mapEle, mapOptions){
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
                         self.clearMarkers();
+                        //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
                         var route = response.routes[0];
                         
