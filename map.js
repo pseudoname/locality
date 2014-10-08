@@ -76,9 +76,9 @@ var Locality = function(mapEle, mapOptions){
                         optimizeWaypoints: true,
                         travelMode: google.maps.TravelMode.DRIVING
                 };
-                directionsService.route(request, function(response, status) {
+                _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(response);
+                        //directionsDisplay.setDirections(response);
                         var route = response.routes[0];
                 }
                 });
