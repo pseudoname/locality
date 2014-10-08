@@ -42,18 +42,17 @@ var Locality = function(mapEle, mapOptions){
                 _selectedMarker = marker;
                 addMarkerEvent(marker, 'click', function(){
                         _selectedMarker = this;
-                        addMarkerEvent(this, 'rightclick', function(event){
-                                var key = event.keyCode || event.charCode;
-                                if(key == 46 )
-                                        self.removeSelectedPathMarker();
-                        });
                 });
-                
+                addMarkerEvent(marker, 'rightclick', function(event){
+                        _selectedMarker = this;
+                        self.removeSelectedPathMarker();
+                });
         };
         self.removeSelectedPathMarker = function(){
                 _selectedMarker.setMap(null);
                 for(var i=0; i<_markers.length;i++){
                         if(_markers[i].id == _selectedMarker.id){
+                                _selectedMarker = _markers[i-1];
                                 _markers.splice(i,1);
                                 break;
                         }
