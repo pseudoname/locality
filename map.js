@@ -92,7 +92,7 @@ var Locality = function(mapEle, mapOptions){
                 });
         };
         self.clearMarkers = function(){
-                for(var i=0, i<_markers.length; i++){
+                for(var i=0; i<_markers.length; i++){
                         _markers[i].setMap(null);
                 }
                 _markers = [];
