@@ -4,6 +4,8 @@ var Locality = function(mapEle, mapOptions){
         var _options;
         var _markers = [];
         var _selectedMarker;
+        var _map;
+        var _directionSvc = new google.maps.DirectionsService();
         
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
@@ -15,7 +17,7 @@ var Locality = function(mapEle, mapOptions){
                         maxZoom:19
                 };
         }
-        var _map;
+        
         self.initialize = function(){
                  _map = new google.maps.Map(_mapEle, _options);
                 
@@ -57,6 +59,26 @@ var Locality = function(mapEle, mapOptions){
                                 break;
                         }
                 }
+        };
+        self.getDirections = function(){
+                if(_markers.length < 2){
+                        console.log("add atleast 2 markers");
+                        alert("Add atleast 2 markers");
+                        return;
+                }
+                var request = {
+                        origin: _markers[0],
+                        destination: _markers[_markers.length-1],
+                        waypoints: _markers.splice(1,_markers.length-2),
+                        optimizeWaypoints: true,
+                        travelMode: google.maps.TravelMode.DRIVING
+                };
+                directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                        var route = response.routes[0];
+                }
+                });
         }
 }
 /*function initialize(mapEle) {
