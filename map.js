@@ -84,10 +84,18 @@ var Locality = function(mapEle, mapOptions){
                 };
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
+                        self.clearMarkers();
                         _directionDisp.setDirections(response);
                         var route = response.routes[0];
+                        
                 }
                 });
+        };
+        self.clearMarkers = function(){
+                for(var i=0, i<_markers.length; i++){
+                        _markers[i].setMap(null);
+                }
+                _markers = [];
         }
 }
 /*function initialize(mapEle) {
