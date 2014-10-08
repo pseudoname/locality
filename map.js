@@ -6,15 +6,22 @@ var Locality = function(mapEle, mapOptions){
                 _options = mapOptions;
         } else {
                 _options = {
-                        center: { lat: -34.397, lng: 150.644},
+                        center: { lat: 42.345573, lng: -71.098326},
                         zoom: 1
                 };
         }
         var _map;
         self.initialize = function(){
-                
-                        _map = new google.maps.Map(_mapEle, _options);
-                
+                 _map = new google.maps.Map(_mapEle, _options);
+                var panoramaOptions = {
+                  position: _options.center,
+                  pov: {
+                    heading: 34,
+                    pitch: 10
+                  }
+                };
+                var panorama = new  google.maps.StreetViewPanorama(_mapEle, panoramaOptions);
+                map.setStreetView(panorama);
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
