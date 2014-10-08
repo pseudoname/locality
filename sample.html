@@ -24,6 +24,11 @@
       locality.addMapEvent('click', function(event){
          locality.addPathMarker(event.latLng); 
       });
+      locality.addMapEvent('keyup', function(event){
+         if(event.which == 68){
+             locality.getDirections();
+         } 
+      });
     </script>
 </body>
 </html>
