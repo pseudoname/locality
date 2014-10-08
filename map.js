@@ -1,7 +1,7 @@
 var Locality = function(mapEle, mapOptions){
         var self = this;
         var _mapEle = mapEle,
-        _options = mapOptions || {
+        _options = (mapOptions)?mapOptions || {
           center: { lat: -34.397, lng: 150.644},
           zoom: 8
         };
