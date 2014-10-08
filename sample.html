@@ -13,6 +13,10 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNBip8unTQpk2BazqCI-G770zRyEb6v3U">
     </script>
     <script type="text/javascript" src="/map.js"></script>
+    
+</head>
+<body>
+    <div id="map-canvas"></div>
     <script type="text/javascript">
       var locality = new Locality(document.getElementById('map-canvas'),{
                         center: { lat: -34.397, lng: 150.644},
@@ -20,8 +24,5 @@
                 });
       google.maps.event.addDomListener(window, 'load', locality.initialize);
     </script>
-</head>
-<body>
-    <div id="map-canvas"></div>
 </body>
 </html>
