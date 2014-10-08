@@ -27,7 +27,10 @@ var Locality = function(mapEle, mapOptions){
         };
         self.addMarkerEvent = function(marker, eventName, handler){
                 google.maps.event.addListener(marker, eventName, handler);
-        }
+        };
+        self.addDomEvent = function(element, eventName, handler){
+          google.maps.event.addDomListener(element, eventName, handler);      
+        };
         self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
                         if(_markers[i].getPosition() == latlong){
