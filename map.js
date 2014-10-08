@@ -77,7 +77,7 @@ var Locality = function(mapEle, mapOptions){
                 }
                 var request = {
                         origin: _markers[0].getPosition(),
-                        destination: (_markers.length == 2)?_markers[_markers.length-1].getPosition():_markers[0].getPosition(),
+                        destination: _markers[_markers.length-1].getPosition(),
                         waypoints: wayPoints,
                         optimizeWaypoints: true,
                         travelMode: google.maps.TravelMode.DRIVING
