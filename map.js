@@ -10,7 +10,7 @@ var Locality = function(mapEle, mapOptions){
         } else {
                 _options = {
                         center: { lat: 42.345573, lng: -71.098326},
-                        zoom: 1
+                        zoom: 12
                 };
         }
         var _map;
