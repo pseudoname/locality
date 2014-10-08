@@ -1,16 +1,24 @@
 var Locality = function(mapEle, mapOptions){
         var self = this;
-        var _mapEle = mapEle,
-        _options = (mapOptions)?mapOptions || {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
-        };
+        var _mapEle = mapEle;
+        var _options;
+        if(mapOptions != undefined && mapOptions != null){
+                _options = mapOptions;
+        } else {
+                _options = {
+                        center: { lat: -34.397, lng: 150.644},
+                        zoom: 1
+                };
+        }
         var _map;
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
         };
+        self.addMapEvent = function(eventName, handler){
+                google.maps.event.addListener(_map, eventName, handler);
+        }
 }
-function initialize(mapEle) {
+/*function initialize(mapEle) {
         var mapOptions = {
           center: { lat: -34.397, lng: 150.644},
           zoom: 8
@@ -35,4 +43,4 @@ function initialize(mapEle) {
             map.setZoom(8);
             map.setCenter(marker.getPosition());
         });
-      }
+      }*/
