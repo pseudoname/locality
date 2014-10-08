@@ -69,10 +69,15 @@ var Locality = function(mapEle, mapOptions){
                         alert("Add atleast 2 markers");
                         return;
                 }
+                var wayPoints = [];
+                var wayPtMarkers = _markers.splice(1,_markers.length-2);
+                for(var i=0; i< wayPtMarkers.length;i++){
+                        wayPoints.push({location:wayPtMarkers[i].getPosition()});
+                }
                 var request = {
-                        origin: _markers[0],
-                        destination: _markers[_markers.length-1],
-                        waypoints: _markers.splice(1,_markers.length-2),
+                        origin: _markers[0].getPosition(),
+                        destination: _markers[_markers.length-1].getPosition(),
+                        waypoints: wayPoints,
                         optimizeWaypoints: true,
                         travelMode: google.maps.TravelMode.DRIVING
                 };
