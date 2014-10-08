@@ -2,6 +2,9 @@ var Locality = function(mapEle, mapOptions){
         var self = this;
         var _mapEle = mapEle;
         var _options;
+        var _markers = [];
+        var _selectedMarker;
+        
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
         } else {
@@ -17,8 +20,37 @@ var Locality = function(mapEle, mapOptions){
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
+        };
+        self.addMarkerEvent = function(marker, eventName, handler){
+                google.maps.event.addListener(marker, eventName, handler);
         }
-        
+        self.addPathMarker = function(latlong){
+                for(var i=0; i<_markers.length; i++){
+                        if(_markers[i].getPosition() == latlong){
+                                return;
+                        }
+                }
+                var marker = new google.maps.Marker({
+                   position:latlong,
+                   draggable:true,
+                   id:(_markers.length > 0)?_markers.length:0,
+                   map: _map
+                });
+                _markers.push(marker);
+                _selectedMarker = marker;
+                addMarkerEvent(marker, 'click', function(){
+                        _selectedMarker = this;
+                });
+        };
+        self.removeSelectedPathMarker = function(){
+                _selectedMarker.setMap(null);
+                for(var i=0; i<_markers.length;i++){
+                        if(_markers[i].id == _selectedMarker.id){
+                                _markers.splice(i,1);
+                                break;
+                        }
+                }
+        }
 }
 /*function initialize(mapEle) {
         var mapOptions = {
