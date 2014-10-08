@@ -12,7 +12,9 @@ var Locality = function(mapEle, mapOptions){
         }
         var _map;
         self.initialize = function(){
-                _map = new google.maps.Map(_mapEle, _options);
+                if(_mapEle){
+                        _map = new google.maps.Map(_mapEle, _options);
+                }
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
