@@ -1,4 +1,15 @@
-
+var Locality = function(mapEle, mapOptions){
+        var self = this;
+        var _mapEle = mapEle,
+        _options = mapOptions || {
+          center: { lat: -34.397, lng: 150.644},
+          zoom: 8
+        };
+        var _map;
+        self.initialize = function(){
+                _map = new google.maps.Map(_mapEle, _options);
+        };
+}
 function initialize(mapEle) {
         var mapOptions = {
           center: { lat: -34.397, lng: 150.644},
