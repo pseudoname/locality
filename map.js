@@ -42,7 +42,7 @@ var Locality = function(mapEle, mapOptions){
                 _selectedMarker = marker;
                 addMarkerEvent(marker, 'click', function(){
                         _selectedMarker = this;
-                        addMarkerEvent(this, 'keyup', function(event){
+                        addMarkerEvent(this, 'rightclick', function(event){
                                 var key = event.keyCode || event.charCode;
                                 if(key == 46 )
                                         self.removeSelectedPathMarker();
