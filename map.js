@@ -4,7 +4,7 @@ var Locality = function(mapEle, mapOptions){
         var _options;
         var _map;
         var _directions;
-        
+        var _streetView;
         
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
@@ -22,7 +22,9 @@ var Locality = function(mapEle, mapOptions){
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
                 _directions = new DirectionsManager(_map);
+                _streetView = new LocalityPlayer(map);
                 self.directions = _directions;
+                self.streetView = _streetView;
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
@@ -35,4 +37,5 @@ var Locality = function(mapEle, mapOptions){
         };
         /**************** Properties **********************/
         self.directions = _directions;
+        self.streetView = _streetView;
 }
