@@ -37,7 +37,10 @@
       });
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
-             locality.directions.getDirections();
+             locality.directions.getDirections(function(data){
+                locality.streetView.setPosition(data.startPosition);
+                locality.streetView.loadStreetView();
+             });
          } 
       });
     </script>
