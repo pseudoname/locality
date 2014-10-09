@@ -26,7 +26,7 @@ var Locality = function(mapEle, previewEle, mapOptions){
                 _streetView.setViewContainer(_previewEle);
                 _streetView.setPosition(_map.getCenter());
                 _directions = new DirectionsManager(_map, _streetView);
-                _self.loadStreetView();
+                _streetView.loadStreetView();
                 self.directions = _directions;
                 self.streetView = _streetView;
                 
