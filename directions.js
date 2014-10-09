@@ -68,7 +68,7 @@ var DirectionsManager = function(map){
                         if(success){
                           success({
                             startPosition:_markers[0].getPosition(),
-                            route: response.routes[0];
+                            route: response.routes[0]
                           });
                         }
                         
