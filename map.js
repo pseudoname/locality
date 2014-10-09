@@ -22,7 +22,7 @@ var Locality = function(mapEle, mapOptions){
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
                 _directions = new DirectionsManager(_map);
-                _streetView = new LocalityPlayer(map);
+                _streetView = new LocalityPlayer(_map);
                 self.directions = _directions;
                 self.streetView = _streetView;
         };
