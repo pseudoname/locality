@@ -1,10 +1,11 @@
-var DirectionsManager = function(map){
+var DirectionsManager = function(map, player){
   var self = this;
   var _markers = [];
   var _selectedMarker;
   var _directionSvc = new google.maps.DirectionsService();
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
+  var _player = player;
   _directionDisp.setMap(_map);
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
@@ -59,6 +60,8 @@ var DirectionsManager = function(map){
                 };
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
+                        _player.setPosition(_markers[0].getPosition());
+                        _player.loadStreetView();
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
