@@ -29,6 +29,9 @@ var DirectionsManager = function(map){
                         self.removeSelectedPathMarker();
                 });
         };
+        self.addMarkerEvent = function(marker, eventName, handler){
+                google.maps.event.addListener(marker, eventName, handler);
+        };
         self.removeSelectedPathMarker = function(){
                 _selectedMarker.setMap(null);
                 for(var i=0; i<_markers.length;i++){
