@@ -16,7 +16,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _viewContainer = ele;
   };
   self.loadStreetView = function(){
-    var panorama = new google.maps.StreetViewPanorama(_viewContainerEle, panoramaOptions);
+    var panorama = new google.maps.StreetViewPanorama(_viewContainer, panoramaOptions);
     _map.setStreetView(panorama);
   };
   self.setPosition = function(position){
