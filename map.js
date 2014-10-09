@@ -33,5 +33,5 @@ var Locality = function(mapEle, mapOptions){
           google.maps.event.addDomListener(element, eventName, handler);      
         };
         /**************** Properties **********************/
-        this['directions'] = _directions;
+        self.directions = _directions;
 }
