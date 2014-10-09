@@ -24,10 +24,12 @@ var Locality = function(mapEle, previewEle, mapOptions){
                 _map = new google.maps.Map(_mapEle, _options);
                 _streetView = new LocalityPlayer(_map);
                 _streetView.setViewContainer(_previewEle);
+                _streetView.setPosition(_map.getCenter());
                 _directions = new DirectionsManager(_map, _streetView);
-                
+                _self.loadStreetView();
                 self.directions = _directions;
                 self.streetView = _streetView;
+                
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
