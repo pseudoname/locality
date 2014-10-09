@@ -1,4 +1,4 @@
-var LocalityPlayer = function(map, options){
+var LocalityPlayer = function(map, viewContainerEle, options){
   var self = this;
   var _map = map;
   var _options = options || {};
@@ -12,7 +12,7 @@ var LocalityPlayer = function(map, options){
     };
   }
   self.loadStreetView = function(){
-    var panorama = new google.maps.StreetViewPanorama(_map.getDiv(), panoramaOptions);
+    var panorama = new google.maps.StreetViewPanorama(viewContainerEle, panoramaOptions);
     _map.setStreetView(panorama);
   }
 }
