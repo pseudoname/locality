@@ -8,11 +8,12 @@
             padding: 0;
         }
         #map_canvas{
-            width:500px;
-            height:400px;
-            position:relative;
+            width:400px;
+            height:300px;
+            position:absolute;
             top:10px;
             left:10px;
+            z-index:100;
         }
     </style>
     
@@ -25,7 +26,8 @@
 </head>
 <body>
     
-    <div id="pano_canvas"><div id="map_canvas"></div></div>
+    <div id="pano_canvas"></div>
+    <div id="map_canvas"></div>
     <script type="text/javascript">
       var locality = new Locality(document.getElementById('map_canvas'), document.getElementById('pano_canvas'));
       //google.maps.event.addDomListener(window, 'load', locality.initialize);
