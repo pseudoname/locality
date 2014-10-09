@@ -64,9 +64,12 @@ var DirectionsManager = function(map){
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
-                        var route = response.routes[0];
+                        
                         if(success){
-                          success(response.routes[0]);
+                          success({
+                            startPosition:_markers[0].getPosition(),
+                            route: response.routes[0];
+                          });
                         }
                         
                 }
