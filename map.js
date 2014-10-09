@@ -1,10 +1,11 @@
-var Locality = function(mapEle, mapOptions){
+var Locality = function(mapEle, previewEle, mapOptions){
         var self = this;
         var _mapEle = mapEle;
         var _options;
         var _map;
         var _directions;
         var _streetView;
+        var _previewEle = previewEle;
         
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
@@ -21,8 +22,10 @@ var Locality = function(mapEle, mapOptions){
         
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
-                _directions = new DirectionsManager(_map);
                 _streetView = new LocalityPlayer(_map);
+                _streetView.setViewContainer(_previewEle);
+                _directions = new DirectionsManager(_map, _streetView);
+                
                 self.directions = _directions;
                 self.streetView = _streetView;
         };
