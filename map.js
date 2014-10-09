@@ -2,11 +2,9 @@ var Locality = function(mapEle, mapOptions){
         var self = this;
         var _mapEle = mapEle;
         var _options;
-        var _markers = [];
-        var _selectedMarker;
         var _map;
-        var _directionSvc = new google.maps.DirectionsService();
-        var _directionDisp = new google.maps.DirectionsRenderer();
+        var _directions;
+        
         
         if(mapOptions != undefined && mapOptions != null){
                 _options = mapOptions;
@@ -22,8 +20,8 @@ var Locality = function(mapEle, mapOptions){
         }
         
         self.initialize = function(){
-                 _map = new google.maps.Map(_mapEle, _options);
-                _directionDisp.setMap(_map);
+                _map = new google.maps.Map(_mapEle, _options);
+                _directions = new DirectionsManager(_map);
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
@@ -34,73 +32,8 @@ var Locality = function(mapEle, mapOptions){
         self.addDomEvent = function(element, eventName, handler){
           google.maps.event.addDomListener(element, eventName, handler);      
         };
-        self.addPathMarker = function(latlong){
-                for(var i=0; i<_markers.length; i++){
-                        if(_markers[i].getPosition() == latlong){
-                                return;
-                        }
-                }
-                var marker = new google.maps.Marker({
-                   position:latlong,
-                   draggable:true,
-                   id:(_markers.length > 0)?_markers.length:0,
-                   map: _map
-                });
-                _markers.push(marker);
-                _selectedMarker = marker;
-                self.addMarkerEvent(marker, 'click', function(){
-                        _selectedMarker = this;
-                });
-                self.addMarkerEvent(marker, 'rightclick', function(event){
-                        _selectedMarker = this;
-                        self.removeSelectedPathMarker();
-                });
-        };
-        self.removeSelectedPathMarker = function(){
-                _selectedMarker.setMap(null);
-                for(var i=0; i<_markers.length;i++){
-                        if(_markers[i].id == _selectedMarker.id){
-                                _selectedMarker = _markers[i-1];
-                                _markers.splice(i,1);
-                                break;
-                        }
-                }
-        };
-        self.getDirections = function(){
-                if(_markers.length < 2){
-                        console.log("add atleast 2 markers");
-                        alert("Add atleast 2 markers");
-                        return;
-                }
-                var wayPoints = [];
-                var tempMarkers = _markers.slice();
-                var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-2);
-                for(var i=0; i< wayPtMarkers.length;i++){
-                        wayPoints.push({location:wayPtMarkers[i].getPosition()});
-                }
-                var request = {
-                        origin: _markers[0].getPosition(),
-                        destination: (_markers.length == 2)?_markers[_markers.length-1].getPosition():_markers[0].getPosition(),
-                        waypoints: wayPoints,
-                        optimizeWaypoints: true,
-                        travelMode: google.maps.TravelMode.DRIVING
-                };
-                _directionSvc.route(request, function(response, status) {
-                if (status == google.maps.DirectionsStatus.OK) {
-                        self.clearMarkers();
-                        //serlf.clearMarkers(wayPtMarkers);
-                        _directionDisp.setDirections(response);
-                        var route = response.routes[0];
-                        
-                }
-                });
-        };
-        self.clearMarkers = function(){
-                for(var i=0; i<_markers.length; i++){
-                        _markers[i].setMap(null);
-                }
-                _markers = [];
-        }
+        /**************** Properties **********************/
+        this.directions = _directions;
 }
 /*function initialize(mapEle) {
         var mapOptions = {
