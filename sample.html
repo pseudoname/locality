@@ -22,11 +22,11 @@
       //google.maps.event.addDomListener(window, 'load', locality.initialize);
       locality.initialize();
       locality.addMapEvent('click', function(event){
-         locality.addPathMarker(event.latLng); 
+         locality.directions.addPathMarker(event.latLng); 
       });
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
-             locality.getDirections();
+             locality.directions.getDirections();
          } 
       });
     </script>
