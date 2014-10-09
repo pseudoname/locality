@@ -22,6 +22,7 @@ var Locality = function(mapEle, mapOptions){
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
                 _directions = new DirectionsManager(_map);
+                self.directions = _directions;
         };
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
