@@ -60,14 +60,14 @@ var DirectionsManager = function(map){
                 };
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-                        
+                        var pos = _markers[0].getPosition();
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
                         
                         if(success){
                           success({
-                            startPosition:_markers[0].getPosition(),
+                            startPosition:pos,
                             route: response.routes[0]
                           });
                         }
