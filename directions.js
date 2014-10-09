@@ -1,11 +1,11 @@
-var DirectionsManager = function(map, player){
+var DirectionsManager = function(map){
   var self = this;
   var _markers = [];
   var _selectedMarker;
   var _directionSvc = new google.maps.DirectionsService();
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
-  var _player = player;
+  
   _directionDisp.setMap(_map);
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
