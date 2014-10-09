@@ -39,7 +39,7 @@ var DirectionsManager = function(map, player){
                         }
                 }
         };
-        self.getDirections = function(){
+        self.getDirections = function(success, error){
                 if(_markers.length < 2){
                         console.log("add atleast 2 markers");
                         alert("Add atleast 2 markers");
@@ -60,13 +60,20 @@ var DirectionsManager = function(map, player){
                 };
                 _directionSvc.route(request, function(response, status) {
                 if (status == google.maps.DirectionsStatus.OK) {
-                        _player.setPosition(_markers[0].getPosition());
-                        _player.loadStreetView();
+                        
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
                         var route = response.routes[0];
+                        if(success){
+                          success(response.routes[0]);
+                        }
                         
+                }
+                else{
+                  if(error){
+                    error("Could not get directions");
+                  }
                 }
                 });
         };
