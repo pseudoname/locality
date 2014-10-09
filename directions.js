@@ -50,7 +50,7 @@ var DirectionsManager = function(map){
                 }
                 var wayPoints = [];
                 var tempMarkers = _markers.slice();
-                var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-2);
+                var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-1);
                 for(var i=0; i< wayPtMarkers.length;i++){
                         wayPoints.push({location:wayPtMarkers[i].getPosition()});
                 }
