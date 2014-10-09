@@ -34,9 +34,7 @@ var Locality = function(mapEle, previewEle, mapOptions){
         self.addMapEvent = function(eventName, handler){
                 google.maps.event.addListener(_map, eventName, handler);
         };
-        self.addMarkerEvent = function(marker, eventName, handler){
-                google.maps.event.addListener(marker, eventName, handler);
-        };
+        
         self.addDomEvent = function(element, eventName, handler){
           google.maps.event.addDomListener(element, eventName, handler);      
         };
