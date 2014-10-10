@@ -5,7 +5,7 @@ var DirectionsManager = function(map){
   var _directionSvc = new google.maps.DirectionsService();
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
-  var _geocoder = google.maps.Geocoder();
+  var _geocoder = new google.maps.Geocoder();
   _directionDisp.setMap(_map);
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
