@@ -15,13 +15,14 @@
             left:10px;
             z-index:100;
         }
-        #address{
+        #addressBox{
             width:400px;
             height:80px;
             position:absolute;
             top:310px;
             left:10px;
             z-index:100;
+            background-color:#fff;
         }
     </style>
     
@@ -36,7 +37,7 @@
     
     <div id="pano_canvas"></div>
     <div id="map_canvas"></div>
-    <div id="address">
+    <div id="addressBox">
         <span>Enter Address:</span>
         <input type="text" id="txtAddress" style="width:290px; margin-left:5px;"/>
         <input type="button" value="Get Address" onclick="getAddress()"/>
