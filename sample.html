@@ -58,7 +58,10 @@
          } 
       });
       function getAddress(){
-          locality.directions.codeAddress(document.getElementById('txtAddress').value);
+          locality.directions.codeAddress(document.getElementById('txtAddress').value, function(data){
+              locality.streetView.setPosition(data.geometry.location);
+              locality.streetView.loadStreetView();
+          });
           return false;
       }
     </script>
