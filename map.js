@@ -16,7 +16,9 @@ var Locality = function(mapEle, previewEle, mapOptions){
                         center: { lat: 42.345573, lng: -71.098326},
                         zoom: 16,
                         minZoom:16,
-                        maxZoom:19
+                        maxZoom:19,
+                        streetViewControl:false,
+                        mapTypeControl:false
                 };
         }
         
