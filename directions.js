@@ -92,13 +92,18 @@ var DirectionsManager = function(map){
                 _markers = [];
         };
         //centers the map to the given address
-        self.codeAddress = function(address) {
+        self.codeAddress = function(address, success, error) {
           _geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               _map.setCenter(results[0].geometry.location);
               self.addPathMarker(results[0].geometry.location);
+              if(success){
+                success({result:results[0]});
+              }
             } else {
-              alert('Geocode was not successful for the following reason: ' + status);
+              if(error){
+                error('Geocode was not successful for the following reason: ' + status);
+              }
             }
           });
         };
