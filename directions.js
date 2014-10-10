@@ -42,6 +42,7 @@ var DirectionsManager = function(map){
                         }
                 }
         };
+        //gets directions using the markers on the map
         self.getDirections = function(success, error){
                 if(_markers.length < 2){
                         console.log("add atleast 2 markers");
@@ -83,12 +84,14 @@ var DirectionsManager = function(map){
                 }
                 });
         };
+        //clears all markers from the map
         self.clearMarkers = function(){
                 for(var i=0; i<_markers.length; i++){
                         _markers[i].setMap(null);
                 }
                 _markers = [];
         };
+        //centers the map to the given address
         self.codeAddress = function(address) {
           _geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
