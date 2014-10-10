@@ -5,7 +5,7 @@ var DirectionsManager = function(map){
   var _directionSvc = new google.maps.DirectionsService();
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
-  
+  var _geocoder = google.maps.Geocoder();
   _directionDisp.setMap(_map);
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
@@ -88,5 +88,15 @@ var DirectionsManager = function(map){
                         _markers[i].setMap(null);
                 }
                 _markers = [];
-        }
+        };
+        self.codeAddress = function(address) {
+          _geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              _map.setCenter(results[0].geometry.location);
+              self.addPathMarker(results[0].geometry.location);
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+        };
 }
