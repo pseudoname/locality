@@ -11,7 +11,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
         heading: 34,
         pitch: 0
       },
-      speed:200
+      speed:1000
     };
   }
   self.setViewContainer = function(ele){
