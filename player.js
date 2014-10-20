@@ -1,6 +1,7 @@
 var LocalityPlayer = function(map, viewContainerEle, options){
   var self = this;
   var _map = map;
+  var _panorama;
   var _options = options || {};
   var _viewContainer = viewContainerEle;
   if(!_options.position){
@@ -16,19 +17,20 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _viewContainer = ele;
   };
   self.loadStreetView = function(){
-    var panorama = new google.maps.StreetViewPanorama(_viewContainer, _options);
-    _map.setStreetView(panorama);
+    _panorama = new google.maps.StreetViewPanorama(_viewContainer, _options);
+    _map.setStreetView(_panorama);
   };
   self.setPosition = function(position){
     _options.position = position;
+    _panoram.setPosition(position);
   };
   self.play = function(directions, positionChangedFn){
     if(options){
       _options = options;
       
     }
-    var panorama = new google.maps.StreetViewPanorama(_viewContainer, _options);
-    google.maps.event.addListener(panorama, 'position_changed', function(){
+    google.maps.event.clearInstanceListeners(_panorama);
+    google.maps.event.addListener(_panorama, 'position_changed', function(){
       if(positionChangedFn){
         positionChangedFn(panorama.getPosition());
       }
