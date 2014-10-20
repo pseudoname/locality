@@ -35,14 +35,21 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     });
     //_map.setStreetView(_panorama);
     console.log(route.legs.length);
-    if(route.legs && route.legs.length > 0){
+    if(route.legs){
       for(var i=0;i<route.legs.length;i++){
-        for(var j=0;j<route.legs[i].steps.length;j++){
-          for(var k=0;k<route.legs[i].steps[j].path.length; k++){
-            var interval = setInterval(function(){
-              _panorama.setPosition(route.legs[i].steps[j].path[k]);
-              clearInterval(interval);
-            },_options.speed);
+        console.log('Leg: ' + i)
+        if(route.legs[i] && route.legs[i].steps){
+          for(var j=0;j<route.legs[i].steps.length;j++){
+            console.log('Step: ' + j);
+            if(route.legs[i].steps[j] && route.legs[i].steps[j].path){
+              for(var k=0;k<route.legs[i].steps[j].path.length; k++){
+                console.log('Path: ' + k);
+                var interval = setInterval(function(){
+                  _panorama.setPosition(route.legs[i].steps[j].path[k]);
+                  clearInterval(interval);
+                },_options.speed);
+              }
+            }
           }
         }
       }
