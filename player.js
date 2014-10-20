@@ -34,13 +34,16 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     //_map.setStreetView(_panorama);
-    for(var i=0;i<route.legs.length;i++){
-      for(var j=0;j<route.legs[i].steps.length;j++){
-        for(var k=0;k<route.legs[i].steps[j].path.length; k++){
-          var interval = setInterval(function(){
-            _panorama.setPosition(route.legs[i].steps[j].path[k]);
-            clearInterval(interval);
-          },_options.speed);
+    console.log(route.legs.length);
+    if(route.legs && route.legs.length > 0){
+      for(var i=0;i<route.legs.length;i++){
+        for(var j=0;j<route.legs[i].steps.length;j++){
+          for(var k=0;k<route.legs[i].steps[j].path.length; k++){
+            var interval = setInterval(function(){
+              _panorama.setPosition(route.legs[i].steps[j].path[k]);
+              clearInterval(interval);
+            },_options.speed);
+          }
         }
       }
     }
