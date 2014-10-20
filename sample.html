@@ -49,16 +49,19 @@
       locality.addMapEvent('click', function(event){
          locality.directions.addPathMarker(event.latLng); 
       });
+      var route;
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
              locality.directions.getDirections(function(data){
                 
                 locality.streetView.loadStreetView();
                 locality.streetView.setPosition(data.startPosition);
+                route = data.route;
+                locality.streetView.play(route);
              });
          }
          else if(event.which == 80){
-             locality.streetView.play();
+             locality.streetView.play(route);
          }
       });
       function getAddress(){
