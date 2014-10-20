@@ -38,13 +38,13 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   function stepThrough(currentLeg, currentStep, currentPath, route){
     console.log(route.legs.length);
-    if(route.legs && currentLeg < route.legs.length){
+    
       
         console.log('Leg: ' + currentLeg)
-        if(route.legs[currentLeg] && route.legs[currentLeg].steps && currentStep < route.legs[currentLeg].steps.length){
+        
           
             console.log('Step: ' + currentStep);
-            if(route.legs[currentLeg].steps[currentStep] && route.legs[currentLeg].steps[currentStep].path && currentPath < route.legs[currentLeg].steps[currentStep].path.length){
+            
              
                 console.log('Path: ' + currentPath);
                 
@@ -79,10 +79,10 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                   //clearTimeout(interval);
                 },_options.speed);
               
-            }
+            
           
-        }
+        
       
-    }
+    
   }
 }
