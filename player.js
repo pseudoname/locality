@@ -38,7 +38,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       for(var j=0;j<route.legs[i].steps.length;j++){
         for(var k=0;k<route.legs[i].steps[j].path.length; k++){
           var interval = setInterval(function(){
-            panorama.setPosition(route.legs[i].steps[j].path[k]);
+            _panorama.setPosition(route.legs[i].steps[j].path[k]);
             clearInterval(interval);
           },_options.speed);
         }
