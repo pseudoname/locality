@@ -48,6 +48,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                 var interval = setInterval(function(){
                   if(i < route.legs.length){
                     _panorama.setPosition(route.legs[i].steps[j].path[k]);
+                    _map.setStreetView(_panorama);
                   }
                   clearInterval(interval);
                 },_options.speed);
@@ -58,10 +59,5 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     }
   };
-  function stepThrough(legs, steps, paths){
-    setTimeout(function(){
-      _panorama.setPosition(path);
-      stepThrough()
-    }, _options.speed);
-  }
+  
 }
