@@ -50,8 +50,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                 
                 var interval = setTimeout(function(){
                   //if(i < route.legs.length){
-                    _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
-                    _map.setStreetView(_panorama);
+                    
                     if(currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
                       currentPath = 0;
                       
@@ -62,14 +61,20 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                           return;
                         }
                         else{
+                          _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                          _map.setStreetView(_panorama);
                           currentLeg++;
                         }
                       }
                       else{
+                        _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                        _map.setStreetView(_panorama);
                         currentStep++;
                       }
                     }
                     else{
+                      _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                      _map.setStreetView(_panorama);
                       currentPath++;
                     }
                     
