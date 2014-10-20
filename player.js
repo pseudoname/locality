@@ -22,7 +22,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   self.setPosition = function(position){
     _options.position = position;
-    _panoram.setPosition(position);
+    _panorama.setPosition(position);
   };
   self.play = function(route, positionChangedFn){
     
