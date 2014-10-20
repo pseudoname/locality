@@ -34,21 +34,26 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     //_map.setStreetView(_panorama);
+    console.log('Total legs in route: ' + route.legs.length);
     stepThrough(0,0,0,route);
   };
   function stepThrough(currentLeg, currentStep, currentPath, route){
-    console.log(route.legs.length);
+    
     
       
-        console.log('Leg: ' + currentLeg)
+        
         if(currentLeg < route.legs.length){
+          console.log('Current Leg: ' + currentLeg)
           console.log('Steps in Leg ' + currentLeg + ': ' + route.legs[currentLeg].steps.length);
+          if(currentStep < route.legs[currentLeg].steps.length){
+            console.log('Current Step: ' + currentStep);
+            console.log('Paths in Step ' + currentStep + ': ' + route.legs[currentLeg].steps[currentStep].path.length);
+            if(currentPath < route.legs[currentLeg].steps[currentStep].length){
+              console.log('Current Path: ' + currentPath);
+            }
+          }
         }
-            console.log('Step: ' + currentStep);
-            if(currentStep < route.legs[currentLeg].steps.length){
-              console.log('Paths in Step ' + currentStep + ': ' + route.legs[currentLeg].steps[currentStep].path.length);
-            } 
-                console.log('Path: ' + currentPath);
+        
                 
                 var interval = setTimeout(function(){
                   //if(i < route.legs.length){
@@ -69,14 +74,43 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                         }
                       }
                       else{
-                        _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
-                        _map.setStreetView(_panorama);
+                        if(currentLeg >= route.legs.length){
+                          return;
+                        }
+                        else{
+                          _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                          _map.setStreetView(_panorama);
+                          currentLeg++;
+                        }
                         currentStep++;
                       }
                     }
                     else{
-                      _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
-                      _map.setStreetView(_panorama);
+                      if(currentLeg < route.legs.length && currentStep >= route.legs[currentLeg].steps.length){
+                        currentStep = 0;
+                        
+                        if(currentLeg >= route.legs.length){
+                          return;
+                        }
+                        else{
+                          _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                          _map.setStreetView(_panorama);
+                          currentLeg++;
+                        }
+                      }
+                      else{
+                        if(currentLeg >= route.legs.length){
+                          return;
+                        }
+                        else{
+                          _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                          _map.setStreetView(_panorama);
+                          currentLeg++;
+                        }
+                        currentStep++;
+                      }
+                      //_panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
+                      //_map.setStreetView(_panorama);
                       currentPath++;
                     }
                     
