@@ -33,9 +33,9 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     //_map.setStreetView(_panorama);
-    for(int i=0;i<route.legs.length;i++){
-      for(int j=0;j<route.legs[i].steps.length;j++){
-        for(int k=0;k<route.legs[i].steps[j].path.length; k++){
+    for(var i=0;i<route.legs.length;i++){
+      for(var j=0;j<route.legs[i].steps.length;j++){
+        for(var k=0;k<route.legs[i].steps[j].path.length; k++){
           var interval = setInterval(_options.speed, function(){
             panorama.setPosition(route.legs[i].steps[j].path[k]);
             clearInterval(interval);
