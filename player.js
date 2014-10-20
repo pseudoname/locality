@@ -25,10 +25,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _panoram.setPosition(position);
   };
   self.play = function(route, positionChangedFn){
-    if(options){
-      _options = options;
-      
-    }
+    
     google.maps.event.clearInstanceListeners(_panorama);
     google.maps.event.addListener(_panorama, 'position_changed', function(){
       if(positionChangedFn){
