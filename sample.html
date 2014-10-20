@@ -58,7 +58,9 @@
                 locality.streetView.setPosition(data.startPosition);
                 route = data.route;
                 locality.streetView.play(route, function(position){
-                    console.log(position.toString());
+                    if(position){
+                        console.log(position.toString());
+                    }
                 });
              });
          }
