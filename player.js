@@ -8,7 +8,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       position: _map.getCenter(),
       pov: {
         heading: 34,
-        pitch: 10
+        pitch: 0
       }
     };
   }
@@ -21,5 +21,28 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   self.setPosition = function(position){
     _options.position = position;
-  }
+  };
+  self.play = function(directions, positionChangedFn){
+    if(options){
+      _options = options;
+      
+    }
+    var panorama = new google.maps.StreetViewPanorama(_viewContainer, _options);
+    google.maps.event.addListener(panorama, 'position_changed', function(){
+      if(positionChangedFn){
+        positionChangedFn(panorama.getPosition());
+      }
+    });
+    _map.setStreetView(panorama);
+    for(int i=0; i< directions.legs.length;i++){
+      for(int j=0; j<direcitons.legs[i].steps.length; j++){
+        for(int k=0; k<directions.legs[i].steps[j].path.length; k++){
+          var interval = setInterval(_options.speed, function(){
+            panorama.setPosition(directions.legs[i].steps[j].path[k]);
+            clearInterval(interval);
+          });
+        }
+      }
+    }
+  };
 }
