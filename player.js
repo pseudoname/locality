@@ -34,30 +34,53 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     //_map.setStreetView(_panorama);
+    
+  };
+  function stepThrough(currentLeg, currentStep, currentPath, route){
     console.log(route.legs.length);
-    if(route.legs){
-      for(var i=0;i<route.legs.length;i++){
-        console.log('Leg: ' + i)
-        if(route.legs[i] && route.legs[i].steps){
-          for(var j=0;j<route.legs[i].steps.length;j++){
+    if(route.legs && currentLeg < route.legs.length){
+      
+        console.log('Leg: ' + currentLeg)
+        if(route.legs[currentLeg] && route.legs[currentLeg].steps && currentStep < route.legs[currentLeg].steps.length){
+          
             console.log('Step: ' + j);
-            if(route.legs[i].steps[j] && route.legs[i].steps[j].path){
-              for(var k=0;k<route.legs[i].steps[j].path.length; k++){
+            if(route.legs[currentLeg].steps[currentStep] && route.legs[currentLeg].steps[currentStep].path && currentPath < route.legs[currentLeg].steps[currentStep].path.length){
+             
                 console.log('Path: ' + k);
                 
-                var interval = setInterval(function(){
-                  if(i < route.legs.length){
-                    _panorama.setPosition(route.legs[i].steps[j].path[k]);
+                var interval = setTimeout(function(){
+                  //if(i < route.legs.length){
+                    _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
                     _map.setStreetView(_panorama);
-                  }
-                  clearInterval(interval);
+                    if(++currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
+                      currentPath = 0;
+                      currentStep++;
+                    }
+                    else{
+                      currentPath++;
+                    }
+                    if(currentStep >= route.legs[currentLeg].steps.length){
+                      currentStep = 0;
+                      currentLeg++;
+                    }
+                    else{
+                      currentStep++;
+                    }
+                    if(currentLeg >= route.legs.length){
+                      return;
+                    }
+                    else{
+                      currentLeg++;
+                    }
+                    stepThrough(currentLeg, currentStep, currentPath, route);
+                  //}
+                  //clearTimeout(interval);
                 },_options.speed);
-              }
+              
             }
-          }
+          
         }
-      }
+      
     }
-  };
-  
+  }
 }
