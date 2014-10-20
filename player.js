@@ -44,8 +44,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
             if(route.legs[i].steps[j] && route.legs[i].steps[j].path){
               for(var k=0;k<route.legs[i].steps[j].path.length; k++){
                 console.log('Path: ' + k);
+                
                 var interval = setInterval(function(){
-                  _panorama.setPosition(route.legs[i].steps[j].path[k]);
+                  if(i < route.legs.length){
+                    _panorama.setPosition(route.legs[i].steps[j].path[k]);
+                  }
                   clearInterval(interval);
                 },_options.speed);
               }
@@ -55,4 +58,10 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     }
   };
+  function stepThrough(legs, steps, paths){
+    setTimeout(function(){
+      _panorama.setPosition(path);
+      stepThrough()
+    }, _options.speed);
+  }
 }
