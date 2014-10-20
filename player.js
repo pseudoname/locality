@@ -55,23 +55,25 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                     if(++currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
                       currentPath = 0;
                       currentStep++;
+                      if(currentStep >= route.legs[currentLeg].steps.length){
+                        currentStep = 0;
+                        currentLeg++;
+                        if(currentLeg >= route.legs.length){
+                          return;
+                        }
+                        else{
+                          currentLeg++;
+                        }
+                      }
+                      else{
+                        currentStep++;
+                      }
                     }
                     else{
                       currentPath++;
                     }
-                    if(currentStep >= route.legs[currentLeg].steps.length){
-                      currentStep = 0;
-                      currentLeg++;
-                    }
-                    else{
-                      currentStep++;
-                    }
-                    if(currentLeg >= route.legs.length){
-                      return;
-                    }
-                    else{
-                      currentLeg++;
-                    }
+                    
+                    
                     stepThrough(currentLeg, currentStep, currentPath, route);
                   //}
                   //clearTimeout(interval);
