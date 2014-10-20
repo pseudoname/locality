@@ -10,7 +10,8 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       pov: {
         heading: 34,
         pitch: 0
-      }
+      },
+      speed:200
     };
   }
   self.setViewContainer = function(ele){
