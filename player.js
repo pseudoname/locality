@@ -24,7 +24,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _options.position = position;
     _panoram.setPosition(position);
   };
-  self.play = function(directions, positionChangedFn){
+  self.play = function(route, positionChangedFn){
     if(options){
       _options = options;
       
@@ -36,11 +36,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     _map.setStreetView(panorama);
-    for(int i=0; i< directions.legs.length;i++){
-      for(int j=0; j<direcitons.legs[i].steps.length; j++){
-        for(int k=0; k<directions.legs[i].steps[j].path.length; k++){
+    for(int i=0; i< route.legs.length;i++){
+      for(int j=0; j<route.legs[i].steps.length; j++){
+        for(int k=0; k<route.legs[i].steps[j].path.length; k++){
           var interval = setInterval(_options.speed, function(){
-            panorama.setPosition(directions.legs[i].steps[j].path[k]);
+            panorama.setPosition(route.legs[i].steps[j].path[k]);
             clearInterval(interval);
           });
         }
