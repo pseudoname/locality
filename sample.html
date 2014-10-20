@@ -52,10 +52,14 @@
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
              locality.directions.getDirections(function(data){
-                locality.streetView.setPosition(data.startPosition);
+                
                 locality.streetView.loadStreetView();
+                locality.streetView.setPosition(data.startPosition);
              });
-         } 
+         }
+         else if(event.which == 80){
+             locality.streetView.play();
+         }
       });
       function getAddress(){
           locality.directions.codeAddress(document.getElementById('txtAddress').value, function(data){
