@@ -48,7 +48,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
           if(currentStep < route.legs[currentLeg].steps.length){
             console.log('Current Step: ' + currentStep);
             console.log('Paths in Step ' + currentStep + ': ' + route.legs[currentLeg].steps[currentStep].path.length);
-            if(currentPath < route.legs[currentLeg].steps[currentStep].length){
+            if(currentPath < route.legs[currentLeg].steps[currentStep].path.length){
               console.log('Current Path: ' + currentPath);
             }
           }
