@@ -52,7 +52,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                   //if(i < route.legs.length){
                     _panorama.setPosition(route.legs[currentLeg].steps[currentStep].path[currentPath]);
                     _map.setStreetView(_panorama);
-                    if(++currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
+                    if(currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
                       currentPath = 0;
                       currentStep++;
                       if(currentStep >= route.legs[currentLeg].steps.length){
