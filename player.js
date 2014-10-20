@@ -53,10 +53,10 @@ var LocalityPlayer = function(map, viewContainerEle, options){
                 var interval = setTimeout(function(){
                   //if(i < route.legs.length){
                     
-                    if(currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
+                    if(currentLeg < route.legs.length && currentStep < route.legs[currentLeg].steps.length && currentPath >= route.legs[currentLeg].steps[currentStep].path.length){
                       currentPath = 0;
                       
-                      if(currentStep >= route.legs[currentLeg].steps.length){
+                      if(currentLeg < route.legs.length && currentStep >= route.legs[currentLeg].steps.length){
                         currentStep = 0;
                         
                         if(currentLeg >= route.legs.length){
