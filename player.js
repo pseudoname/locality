@@ -34,7 +34,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
     });
     //_map.setStreetView(_panorama);
-    
+    stepThrough(0,0,0,route);
   };
   function stepThrough(currentLeg, currentStep, currentPath, route){
     console.log(route.legs.length);
