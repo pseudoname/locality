@@ -29,13 +29,13 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     google.maps.event.clearInstanceListeners(_panorama);
     google.maps.event.addListener(_panorama, 'position_changed', function(){
       if(positionChangedFn){
-        positionChangedFn(panorama.getPosition());
+        positionChangedFn(_panorama.getPosition());
       }
     });
-    _map.setStreetView(panorama);
-    for(int i=0; i< route.legs.length;i++){
-      for(int j=0; j<route.legs[i].steps.length; j++){
-        for(int k=0; k<route.legs[i].steps[j].path.length; k++){
+    //_map.setStreetView(_panorama);
+    for(int i=0;i<route.legs.length;i++){
+      for(int j=0;j<route.legs[i].steps.length;j++){
+        for(int k=0;k<route.legs[i].steps[j].path.length; k++){
           var interval = setInterval(_options.speed, function(){
             panorama.setPosition(route.legs[i].steps[j].path[k]);
             clearInterval(interval);
