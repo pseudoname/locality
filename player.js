@@ -41,11 +41,13 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     
       
         console.log('Leg: ' + currentLeg)
-        
-          
+        if(currentLeg < route.legs.length){
+          console.log('Steps in Leg ' + currentLeg + ': ' + route.legs[currentLeg].steps.length);
+        }
             console.log('Step: ' + currentStep);
-            
-             
+            if(currentStep < route.legs[currentLeg].steps.length){
+              console.log('Paths in Step ' + currentStep + ': ' + route.legs[currentLeg].steps[currentStep].path.length);
+            } 
                 console.log('Path: ' + currentPath);
                 
                 var interval = setTimeout(function(){
