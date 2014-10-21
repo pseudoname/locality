@@ -24,8 +24,8 @@ var Locality = function(mapEle, previewEle, mapOptions){
         
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
-                _streetView = new LocalityPlayer(_map);
-                _streetView.setViewContainer(_previewEle);
+                _streetView = new LocalityPlayer(_map, _previewEle);
+                //_streetView.setViewContainer(_previewEle);
                 
                 _directions = new DirectionsManager(_map);
                 _streetView.loadStreetView();
@@ -40,6 +40,10 @@ var Locality = function(mapEle, previewEle, mapOptions){
         
         self.addDomEvent = function(element, eventName, handler){
           google.maps.event.addDomListener(element, eventName, handler);      
+        };
+        self.setPlayer = function(previewEle, options){
+          _streetView = new LocalityPlayer(_map, previewEle, options);
+          self.streetView = _streetView;
         };
         /**************** Properties **********************/
         self.directions = _directions;
