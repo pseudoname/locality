@@ -41,10 +41,13 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     if(currentStep >= route.overview_path.length){
       return;
     }
-    console.log('Current Step: ' + currentStep);
-    _panorama.setPosition(route.overview_path[currentStep]);
-    _map.setStreetView(_panorama);
-    currentStep++;
+    setTimeout(function(){
+      console.log('Current Step: ' + currentStep);
+      _panorama.setPosition(route.overview_path[currentStep]);
+      _map.setStreetView(_panorama);
+      currentStep++;
+      stepThroughPath(route, currentStep);
+    },_options.speed);
   }
   function stepThrough(currentLeg, currentStep, currentPath, route){
     
