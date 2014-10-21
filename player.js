@@ -33,8 +33,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
         positionChangedFn(_panorama.getPosition());
       }
     });
-    //_map.setStreetView(_panorama);
-    console.log('Total legs in route: ' + route.legs.length);
+   
     //stepThrough(0,0,0,route);
     stepThroughPath(route, 0);
   };
@@ -42,6 +41,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     if(currentStep >= route.overview_path.length){
       return;
     }
+    console.log('Current Step: ' + currentStep);
     _panorama.setPosition(route.overview_path[currentStep]);
     _map.setStreetView(_panorama);
     currentStep++;
