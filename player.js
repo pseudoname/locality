@@ -35,8 +35,17 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     });
     //_map.setStreetView(_panorama);
     console.log('Total legs in route: ' + route.legs.length);
-    stepThrough(0,0,0,route);
+    //stepThrough(0,0,0,route);
+    stepThroughPath(route, 0);
   };
+  function stepThroughPath(route, currentStep){
+    if(currentStep >= route.overview_path.length){
+      return;
+    }
+    _panorama.setPosition(route.overview_path[currentStep]);
+    _map.setStreetView(_panorama);
+    currentStep++;
+  }
   function stepThrough(currentLeg, currentStep, currentPath, route){
     
     
