@@ -14,11 +14,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       speed:500
     };
   }
-  self.playEnded = function(callback){
-    if(callback){
-      callback();
-    }
-  };
+  
   self.setViewContainer = function(ele){
     _viewContainer = ele;
   };
@@ -30,7 +26,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _options.position = position;
     _panorama.setPosition(position);
   };
-  self.play = function(route, positionChangedFn){
+  self.play = function(route){
     var panoramas = [];
     for(var i=0; i<route.overview_path.length; i++){
       var pano = new google.maps.StreetViewPanorama(_viewContainer, _options);
@@ -42,13 +38,20 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   function stepThroughPath(panos, currentStep){
     if(currentStep >= panos.length){
+      if(_options.playEnded){
+        _options.playEnded();
+      }
       return;
     }
+    
     setTimeout(function(){
       console.log('Current Step: ' + currentStep);
       
       //_panorama.setPosition(route.overview_path[currentStep]);
       _map.setStreetView(panos[currentStep]);
+      if(_options.streetViewChanged){
+        _options.streetViewChanged(panos[currentStep]);
+      }
       currentStep++;
       stepThroughPath(panos, currentStep);
     },_options.speed);
