@@ -54,8 +54,8 @@
          if(event.which == 68){
              locality.directions.getDirections(function(data){
                 
-                locality.streetView.loadStreetView();
-                locality.streetView.setPosition(data.startPosition);
+                //locality.streetView.loadStreetView();
+                //locality.streetView.setPosition(data.startPosition);
                 route = data.route;
                 console.log('Number of steps in overview path: ' + route.overview_path.length);
                 locality.streetView.play(route);
