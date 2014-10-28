@@ -24,7 +24,17 @@ var Locality = function(mapEle, previewEle, mapOptions){
         
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
-                _streetView = new LocalityPlayer(_map, _previewEle);
+                _streetView = new LocalityPlayer(_map, _previewEle, {
+                              position: _map.getCenter(),
+                              pov: {
+                                heading: 34,
+                                pitch: 0
+                              },
+                              speed:500,
+                              playEnded: function(){
+                                      _directions.clearMarkers();
+                              }
+                            });
                 //_streetView.setViewContainer(_previewEle);
                 
                 _directions = new DirectionsManager(_map);
