@@ -14,6 +14,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       speed:500
     };
   }
+  self.playEnded = function(callback){
+    if(callback){
+      callback();
+    }
+  };
   self.setViewContainer = function(ele){
     _viewContainer = ele;
   };
@@ -26,13 +31,6 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _panorama.setPosition(position);
   };
   self.play = function(route, positionChangedFn){
-    
-    google.maps.event.clearInstanceListeners(_panorama);
-    google.maps.event.addListener(_panorama, 'position_changed', function(){
-      if(positionChangedFn){
-        positionChangedFn(_panorama.getPosition());
-      }
-    });
     var panoramas = [];
     for(var i=0; i<route.overview_path.length; i++){
       var pano = new google.maps.StreetViewPanorama(_viewContainer, _options);
