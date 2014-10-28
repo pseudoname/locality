@@ -31,10 +31,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     for(var i=0; i<route.overview_path.length; i++){
       var panoOptions = {
       position: route.overview_path[i],
-      pov: {
-        heading: _options.heading,
-        pitch: _options.pitch
-      },
+      pov: _options.pov,
       speed:_options.speed
     };
       var pano = new google.maps.StreetViewPanorama(_viewContainer, panoOptions);
