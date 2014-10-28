@@ -58,11 +58,7 @@
                 locality.streetView.setPosition(data.startPosition);
                 route = data.route;
                 console.log('Number of steps in overview path: ' + route.overview_path.length);
-                locality.streetView.play(route, function(position){
-                    if(position){
-                        console.log(position.toString());
-                    }
-                });
+                locality.streetView.play(route);
              });
          }
          else if(event.which == 80){
