@@ -42,6 +42,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     stepThroughPath(panoramas, 0);
   };
   function stepThroughPath(panos, currentStep){
+    console.log("Panorama Count: " + panos.length + " CurrentStep: " + currentStep);
     if(currentStep >= panos.length){
       if(_options.playEnded){
         _options.playEnded();
@@ -50,10 +51,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     }
     
     setTimeout(function(){
-      console.log('Current Step: ' + currentStep);
+      //console.log('Current Step: ' + currentStep);
       
       //_panorama.setPosition(route.overview_path[currentStep]);
       _map.setStreetView(panos[currentStep]);
+      console.log("Street View set on map for step " + currentStep);
       if(_options.streetViewChanged){
         _options.streetViewChanged(panos[currentStep]);
       }
