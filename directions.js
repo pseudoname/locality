@@ -88,6 +88,7 @@ var DirectionsManager = function(map){
         self.clearMarkers = function(){
                 for(var i=0; i<_markers.length; i++){
                         _markers[i].setMap(null);
+                        console.log('Clearing marker ' + i);
                 }
                 _markers = [];
         };
