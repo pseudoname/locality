@@ -6,7 +6,7 @@ var DirectionsManager = function(map){
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
   var _geocoder = new google.maps.Geocoder();
-  _directionDisp.setMap(_map);
+  
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
                         if(_markers[i].getPosition() == latlong){
@@ -49,6 +49,7 @@ var DirectionsManager = function(map){
                         alert("Add atleast 2 markers");
                         return;
                 }
+                _directionDisp.setMap(_map);
                 var wayPoints = [];
                 var tempMarkers = _markers.slice();
                 var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-1);
@@ -91,6 +92,9 @@ var DirectionsManager = function(map){
                         console.log('Clearing marker ' + i);
                 }
                 _markers = [];
+        };
+        self.clearDirections = function(){
+          _directionDisp.setMap(null);
         };
         //centers the map to the given address
         self.codeAddress = function(address, success, error) {
