@@ -96,6 +96,8 @@ var DirectionsManager = function(map){
         self.clearDirections = function(){
           _directionDisp.setMap(null);
         };
+        //hasDirections property
+        self.hasDirections = (_markers.length>2)?true:false;
         //centers the map to the given address
         self.codeAddress = function(address, success, error) {
           _geocoder.geocode( { 'address': address}, function(results, status) {
