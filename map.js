@@ -33,7 +33,7 @@ var Locality = function(mapEle, previewEle, mapOptions){
                               speed:500,
                               playEnded: function(){
                                       console.log('Play ended');
-                                      _directions.clearMarkers();
+                                      _directions.clearDirections();
                               }
                             });
                 //_streetView.setViewContainer(_previewEle);
