@@ -6,7 +6,7 @@ var DirectionsManager = function(map){
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
   var _geocoder = new google.maps.Geocoder();
-  
+  var _currentRoute;
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
                         if(_markers[i].getPosition() == latlong){
@@ -69,7 +69,7 @@ var DirectionsManager = function(map){
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
-                        
+                        _currentRoute = response.routes[0];
                         if(success){
                           success({
                             startPosition:pos,
@@ -85,6 +85,9 @@ var DirectionsManager = function(map){
                 }
                 });
         };
+        self.getCurrentRoute = function(){
+          return _currentRoute;
+        };
         //clears all markers from the map
         self.clearMarkers = function(){
                 for(var i=0; i<_markers.length; i++){
@@ -95,6 +98,7 @@ var DirectionsManager = function(map){
         };
         self.clearDirections = function(){
           _directionDisp.setMap(null);
+          _currentRoute = null;
         };
         //hasDirections property
         self.hasDirections = (_markers.length>2)?true:false;
