@@ -30,12 +30,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     var panoramas = [];
     for(var i=0; i<route.overview_path.length; i++){
       var panoOptions = {
-      position: route.overview_path[i],
-      pov: _options.pov,
-      speed:_options.speed
-    };
+        pov: _options.pov,
+        speed:_options.speed
+      };
       var pano = new google.maps.StreetViewPanorama(_viewContainer, panoOptions);
-      //pano.setPosition();
+      pano.setPosition(route.overview_path[i]);
       panoramas.push(pano);
     }
     //stepThrough(0,0,0,route);
