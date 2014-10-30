@@ -49,20 +49,18 @@
       locality.addMapEvent('click', function(event){
          locality.directions.addPathMarker(event.latLng); 
       });
-      var route;
+      
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
              locality.directions.getDirections(function(data){
-                
-                //locality.streetView.loadStreetView();
-                //locality.streetView.setPosition(data.startPosition);
-                route = data.route;
-                console.log('Number of steps in overview path: ' + route.overview_path.length);
-                locality.streetView.play(route);
+                console.log('Number of steps in overview path: ' + data.route.overview_path.length);
+                locality.streetView.play(data.route);
              });
          }
          else if(event.which == 80){
-             locality.streetView.play(route);
+             if(locality.directions.hasDirections){
+                locality.streetView.play(route);
+             }
          }
       });
       function getAddress(){
