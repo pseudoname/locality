@@ -59,7 +59,7 @@
          }
          else if(event.which == 80){
              if(locality.directions.hasDirections){
-                locality.streetView.play(route);
+                locality.streetView.play(locality.directions.getCurrentRoute());
              }
          }
       });
