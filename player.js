@@ -41,14 +41,14 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     stepThroughPath(panoramas, 0);
   };
   function stepThroughPath(panos, currentStep){
-    console.log("Panorama Count: " + panos.length + " CurrentStep: " + currentStep);
+    
     if(currentStep >= panos.length){
       if(_options.playEnded){
         _options.playEnded();
       }
       return;
     }
-    
+    console.log("Panorama Count: " + panos.length + " CurrentStep: " + currentStep);
     setTimeout(function(){
       //console.log('Current Step: ' + currentStep);
       
