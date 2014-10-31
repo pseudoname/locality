@@ -25,7 +25,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   self.setPosition = function(position){
     _options.position = position;
     _panorama.setPosition(position);
-    _map.setStreetView(_panorama);
+    //_map.setStreetView(_panorama);
   };
   self.play = function(route){
     var panoramas = [];
