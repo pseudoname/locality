@@ -25,6 +25,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   self.setPosition = function(position){
     _options.position = position;
     _panorama.setPosition(position);
+    _map.setStreetView(_panorama);
   };
   self.play = function(route){
     var panoramas = [];
@@ -52,8 +53,8 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     setTimeout(function(){
       //console.log('Current Step: ' + currentStep);
       
-      _panorama.setPosition(panos[currentStep]);
-      _map.setStreetView(_panorama);
+      self.setPosition(panos[currentStep]);
+      //_map.setStreetView(_panorama);
       console.log("Street View set on map for step " + currentStep);
       if(_options.streetViewChanged){
         _options.streetViewChanged(panos[currentStep]);
