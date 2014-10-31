@@ -40,7 +40,8 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       panoramas.push(pano);
     }
     //stepThrough(0,0,0,route);
-    stepThroughPath(route.overview_path, 0);
+    //stepThroughPath(route.overview_path, 0);
+    self.setPosition(route.overview_path[3]);
   };
   function stepThroughPath(panos, currentStep){
     
