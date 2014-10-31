@@ -41,10 +41,10 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       panoramas.push(pano);
     }
     //stepThrough(0,0,0,route);
-    //stepThroughPath(route.overview_path, 0);
-    console.log('First point is ' + route.overview_path[0].toString());
-    console.log('Fourth point is ' + route.overview_path[3].toString());
-    self.setPosition(route.overview_path[3]);
+    
+    stepThroughPath(route.overview_path, 0);
+    
+    //self.setPosition(route.overview_path[3]);
   };
   function stepThroughPath(panos, currentStep){
     
@@ -54,7 +54,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
       return;
     }
-    console.log("Panorama Count: " + panos.length + " CurrentStep: " + currentStep);
+    console.log("Step " + currentStep + " position: " + panos[currentStep].toString());
     setTimeout(function(){
       //console.log('Current Step: ' + currentStep);
       
