@@ -51,7 +51,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     _options.position = position;
     
     _panorama.setPosition(position);
-    if(_currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
+    if(_currentRoute && _currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
         _options.streetViewChanged(_currentRoute[_currentStep-1]);
     }
     
