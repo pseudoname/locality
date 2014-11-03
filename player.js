@@ -4,6 +4,9 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   var _panorama;
   var _options = options || {};
   var _viewContainer = viewContainerEle;
+  var _currentStep = 0;
+  var _currentRoute;
+  
   if(!_options.position){
     _options = {
       position: _map.getCenter(),
@@ -16,6 +19,26 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   }
   _panorama = new google.maps.StreetViewPanorama(_viewContainer, _options);
   _map.setStreetView(_panorama);
+  self.addPanoramaEvent = function(eventName, handler){
+    google.maps.event.addListener(_panorama, eventName, handler);
+  };
+  self.addPanoramaEvent('pano_changed', function(){
+    if(_currentStep > -1 && _currentStep >= _currentRoute.length){
+      _currentStep = 0;
+      _currentRoute = [];
+      if(_options.playEnded){
+        _options.playEnded();
+      }
+      return;
+    }
+    _currentStep++;
+    console.log("Street View set on map for step " + currentStep-1);
+    self.setPosition(panos[_currentStep-1]);
+      //_map.setStreetView(_panorama);
+      
+      
+      
+  });
   self.setViewContainer = function(ele){
     _viewContainer = ele;
   };
@@ -26,7 +49,9 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   self.setPosition = function(position){
     _options.position = position;
     _panorama.setPosition(position);
-
+    if(_currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
+        _options.streetViewChanged(_currentRoute[_currentStep-1]);
+    }
     console.log('Status of set position for Pano ID ' + _panorama.getPano() + ' is ' + _panorama.getStatus());
     _map.setStreetView(_panorama);
   };
@@ -41,9 +66,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       pano.setPosition(route.overview_path[i]);
       panoramas.push(pano);
     }
+    _currentRoute = route.overview_path;
+    self.setPosition(_currentRoute[_currentPosition]);
     //stepThrough(0,0,0,route);
     
-    stepThroughPath(route.overview_path, 0);
+    //stepThroughPath(route.overview_path, 0);
     
     //self.setPosition(route.overview_path[3]);
   };
