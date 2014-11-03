@@ -31,10 +31,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       }
       return;
     }
+    _map.setStreetView(_panorama);
     _currentStep++;
     console.log("Street View set on map for step " + _currentStep-1);
     self.setPosition(_currentRoute[_currentStep-1]);
-      //_map.setStreetView(_panorama);
+    console.log('Status of set position for Pano ID ' + _panorama.getPano() + ' is ' + _panorama.getStatus());
       
       
       
@@ -48,12 +49,12 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   self.setPosition = function(position){
     _options.position = position;
-    _panorama.setPosition(position);
     if(_currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
         _options.streetViewChanged(_currentRoute[_currentStep-1]);
     }
-    console.log('Status of set position for Pano ID ' + _panorama.getPano() + ' is ' + _panorama.getStatus());
-    _map.setStreetView(_panorama);
+    _panorama.setPosition(position);
+    
+    
   };
   self.play = function(route){
     var panoramas = [];
