@@ -67,7 +67,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       panoramas.push(pano);
     }
     _currentRoute = route.overview_path;
-    self.setPosition(_currentRoute[_currentPosition]);
+    self.setPosition(_currentRoute[_currentStep]);
     //stepThrough(0,0,0,route);
     
     //stepThroughPath(route.overview_path, 0);
