@@ -5,7 +5,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   var _options = options || {};
   var _viewContainer = viewContainerEle;
   var _currentStep = 0;
-  var _currentRoute;
+  var _currentRoute = [];
   
   if(!_options.position){
     _options = {
