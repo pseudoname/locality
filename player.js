@@ -49,11 +49,11 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   };
   self.setPosition = function(position){
     _options.position = position;
+    
+    _panorama.setPosition(position);
     if(_currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
         _options.streetViewChanged(_currentRoute[_currentStep-1]);
     }
-    _panorama.setPosition(position);
-    
     
   };
   self.play = function(route){
