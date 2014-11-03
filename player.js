@@ -26,7 +26,8 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   self.setPosition = function(position){
     _options.position = position;
     _panorama.setPosition(position);
-    console.log('Status of set position ' + _panorama.getStatus());
+
+    console.log('Status of set position for Pano ID ' + _panorama.getPano() + ' is ' + _panorama.getStatus());
     _map.setStreetView(_panorama);
   };
   self.play = function(route){
