@@ -30,7 +30,7 @@ var Locality = function(mapEle, previewEle, mapOptions){
                                 heading: 34,
                                 pitch: 0
                               },
-                              speed:500,
+                              speed:1500,
                               playEnded: function(){
                                       console.log('Play ended');
                                       _directions.clearDirections();
