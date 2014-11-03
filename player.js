@@ -33,7 +33,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     }
     _currentStep++;
     console.log("Street View set on map for step " + _currentStep-1);
-    self.setPosition(panos[_currentStep-1]);
+    self.setPosition(_currentRoute[_currentStep-1]);
       //_map.setStreetView(_panorama);
       
       
