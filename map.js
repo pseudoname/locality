@@ -25,10 +25,12 @@ var Locality = function(mapEle, previewEle, mapOptions){
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
                 _streetView = new LocalityPlayer(_map, _previewEle, {
-                              position: _map.getCenter(),
-                              pov: {
-                                heading: 34,
-                                pitch: 0
+                              panoOptions:{
+                                position: _map.getCenter(),
+                                pov: {
+                                        heading: 34,
+                                        pitch: 0
+                                }
                               },
                               speed:1500,
                               playEnded: function(){
