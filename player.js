@@ -22,7 +22,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
   self.addPanoramaEvent = function(eventName, handler){
     google.maps.event.addListener(_panorama, eventName, handler);
   };
-  self.addPanoramaEvent('pano_changed', function(){
+  /*self.addPanoramaEvent('pano_changed', function(){
     if(_currentStep > -1 && _currentStep >= _currentRoute.length){
       _currentStep = 0;
       _currentRoute = [];
@@ -39,7 +39,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       
       
       
-  });
+  });*/
   self.setViewContainer = function(ele){
     _viewContainer = ele;
   };
@@ -68,33 +68,24 @@ var LocalityPlayer = function(map, viewContainerEle, options){
       panoramas.push(pano);
     }
     _currentRoute = route.overview_path;
-    self.setPosition(_currentRoute[_currentStep]);
+    //self.setPosition(_currentRoute[_currentStep]);
     //stepThrough(0,0,0,route);
     
-    //stepThroughPath(route.overview_path, 0);
+    stepThroughPath(route, 0);
     
     //self.setPosition(route.overview_path[3]);
   };
-  function stepThroughPath(panos, currentStep){
+  function stepThroughPath(route, currentStep){
     
-    if(currentStep >= panos.length){
-      if(_options.playEnded){
-        _options.playEnded();
-      }
-      return;
-    }
-    console.log("Step " + currentStep + " position: " + panos[currentStep].toString());
+    if(currentStep >= route.overview_path.length){
+       return;
+     }
     setTimeout(function(){
-      //console.log('Current Step: ' + currentStep);
-      
-      self.setPosition(panos[currentStep]);
-      //_map.setStreetView(_panorama);
-      console.log("Street View set on map for step " + currentStep);
-      if(_options.streetViewChanged){
-        _options.streetViewChanged(panos[currentStep]);
-      }
-      currentStep++;
-      stepThroughPath(panos, currentStep);
+      console.log('Current Step: ' + currentStep);
+      _panorama.setPosition(route.overview_path[currentStep]);
+      _map.setStreetView(_panorama);
+     currentStep++;
+      stepThroughPath(route, currentStep);
     },_options.speed);
   }
   
