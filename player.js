@@ -54,7 +54,7 @@ var LocalityPlayer = function(map, viewContainerEle, options){
     if(_currentRoute && _currentRoute.length > 0 && _currentStep > 0 && _options.streetViewChanged){
         _options.streetViewChanged(_currentRoute[_currentStep-1]);
     }
-    
+    _map.setStreetView(_panorama);
   };
   self.play = function(route){
     var panoramas = [];
