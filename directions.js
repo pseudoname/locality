@@ -5,8 +5,8 @@ var DirectionsManager = function(map){
   var _directionSvc = new google.maps.DirectionsService();
   var _directionDisp = new google.maps.DirectionsRenderer();
   var _map = map;
-  
-  _directionDisp.setMap(_map);
+  var _geocoder = new google.maps.Geocoder();
+  var _currentRoute;
   self.addPathMarker = function(latlong){
                 for(var i=0; i<_markers.length; i++){
                         if(_markers[i].getPosition() == latlong){
@@ -42,12 +42,14 @@ var DirectionsManager = function(map){
                         }
                 }
         };
+        //gets directions using the markers on the map
         self.getDirections = function(success, error){
                 if(_markers.length < 2){
                         console.log("add atleast 2 markers");
                         alert("Add atleast 2 markers");
                         return;
                 }
+                _directionDisp.setMap(_map);
                 var wayPoints = [];
                 var tempMarkers = _markers.slice();
                 var wayPtMarkers = tempMarkers.splice(1,tempMarkers.length-1);
@@ -67,7 +69,7 @@ var DirectionsManager = function(map){
                         self.clearMarkers();
                         //serlf.clearMarkers(wayPtMarkers);
                         _directionDisp.setDirections(response);
-                        
+                        _currentRoute = response.routes[0];
                         if(success){
                           success({
                             startPosition:pos,
@@ -83,10 +85,37 @@ var DirectionsManager = function(map){
                 }
                 });
         };
+        self.getCurrentRoute = function(){
+          return _currentRoute;
+        };
+        //clears all markers from the map
         self.clearMarkers = function(){
                 for(var i=0; i<_markers.length; i++){
                         _markers[i].setMap(null);
+                        console.log('Clearing marker ' + i);
                 }
                 _markers = [];
-        }
+        };
+        self.clearDirections = function(){
+          _directionDisp.setMap(null);
+          _currentRoute = null;
+        };
+        //hasDirections property
+        self.hasDirections = (_markers.length>2)?true:false;
+        //centers the map to the given address
+        self.codeAddress = function(address, success, error) {
+          _geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              _map.setCenter(results[0].geometry.location);
+              self.addPathMarker(results[0].geometry.location);
+              if(success){
+                success({result:results[0]});
+              }
+            } else {
+              if(error){
+                error('Geocode was not successful for the following reason: ' + status);
+              }
+            }
+          });
+        };
 }

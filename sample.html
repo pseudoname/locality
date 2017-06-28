@@ -15,6 +15,15 @@
             left:10px;
             z-index:100;
         }
+        #addressBox{
+            width:400px;
+            height:80px;
+            position:absolute;
+            top:310px;
+            left:10px;
+            z-index:100;
+            background-color:#fff;
+        }
     </style>
     
     <script type="text/javascript"
@@ -28,6 +37,11 @@
     
     <div id="pano_canvas"></div>
     <div id="map_canvas"></div>
+    <div id="addressBox">
+        <span>Enter Address:</span>
+        <input type="text" id="txtAddress" style="width:290px; margin-left:5px;"/>
+        <input type="button" value="Get Address" onclick="getAddress()"/>
+    </div>
     <script type="text/javascript">
       var locality = new Locality(document.getElementById('map_canvas'), document.getElementById('pano_canvas'));
       //google.maps.event.addDomListener(window, 'load', locality.initialize);
@@ -35,14 +49,27 @@
       locality.addMapEvent('click', function(event){
          locality.directions.addPathMarker(event.latLng); 
       });
+      
       locality.addDomEvent(window, 'keyup', function(event){
          if(event.which == 68){
              locality.directions.getDirections(function(data){
-                locality.streetView.setPosition(data.startPosition);
-                locality.streetView.loadStreetView();
+                console.log('Number of steps in overview path: ' + data.route.overview_path.length);
+                locality.streetView.play(data.route);
              });
-         } 
+         }
+         else if(event.which == 80){
+             if(locality.directions.hasDirections){
+                locality.streetView.play(locality.directions.getCurrentRoute());
+             }
+         }
       });
+      function getAddress(){
+          locality.directions.codeAddress(document.getElementById('txtAddress').value, function(data){
+              locality.streetView.setPosition(data.result.geometry.location);
+              //locality.streetView.loadStreetView();
+          });
+          return false;
+      }
     </script>
 </body>
 </html>

@@ -16,17 +16,33 @@ var Locality = function(mapEle, previewEle, mapOptions){
                         center: { lat: 42.345573, lng: -71.098326},
                         zoom: 16,
                         minZoom:16,
-                        maxZoom:19
+                        maxZoom:19,
+                        streetViewControl:false,
+                        mapTypeControl:false
                 };
         }
         
         self.initialize = function(){
                 _map = new google.maps.Map(_mapEle, _options);
-                _streetView = new LocalityPlayer(_map);
-                _streetView.setViewContainer(_previewEle);
-                _streetView.setPosition(_map.getCenter());
+                _streetView = new LocalityPlayer(_map, _previewEle, {
+                              panoOptions:{
+                                position: _map.getCenter(),
+                                pov: {
+                                        heading: 34,
+                                        pitch: 0
+                                }
+                              },
+                              speed:1500,
+                              playEnded: function(){
+                                      console.log('Play ended');
+                                      _directions.clearDirections();
+                              }
+                            });
+                //_streetView.setViewContainer(_previewEle);
+                
                 _directions = new DirectionsManager(_map);
-                _streetView.loadStreetView();
+                //_streetView.loadStreetView();
+               // _streetView.setPosition(_map.getCenter());
                 self.directions = _directions;
                 self.streetView = _streetView;
                 
@@ -37,6 +53,10 @@ var Locality = function(mapEle, previewEle, mapOptions){
         
         self.addDomEvent = function(element, eventName, handler){
           google.maps.event.addDomListener(element, eventName, handler);      
+        };
+        self.setPlayer = function(previewEle, options){
+          _streetView = new LocalityPlayer(_map, previewEle, options);
+          self.streetView = _streetView;
         };
         /**************** Properties **********************/
         self.directions = _directions;
